@@ -35,7 +35,10 @@ def plot_vectors( evectors ):
 		vec = evectors[ i , : ]
 
 		plt.plot(  range( vec.shape[0] ) , vec  )
-		plt.savefig("./eigenvec_{}.png".format( i ) )
+		plt.xlabel( " i-th position ")
+		plt.ylabel(" i-th value of eigenvalue")
+		plt.title( " {}-th smallest  eigen vector".format( 1+i ))
+		plt.savefig("./eigenvec_{}.png".format( 1+i ) )
 		plt.clf()
 
 
@@ -62,8 +65,9 @@ def do_thing( L  , k = 4 , prefix = "" ):
 	combs = list( itertools.combinations( range( smallest_vectors.shape[ 1 ] ) , 2) )
 
 	for  i , j in combs:
-		name = "{}_i_{}_j_{}.png".format( prefix, i,j)
+		name = "{}_i_{}_j_{}.png".format( prefix, i+1,j+1 )
 		plt.scatter( smallest_vectors[ : ,  i ] , smallest_vectors[: , j ]  )
+		plt.title( "Eigenvector {} vs Eigenvector {}".format( i +1 , j +1 )  )
 		plt.savefig("{}".format(name))
 		plt.clf()
 	print(combs)
@@ -71,7 +75,7 @@ def do_thing( L  , k = 4 , prefix = "" ):
 	return smallest_vectors 
 
 
-def main( epsilon = 0.5  , A = 8):
+def main( epsilon = 0.0001  , A = 2 ):
 
 	A = A +1 
 	df = read_data("./exercise3data.csv")
